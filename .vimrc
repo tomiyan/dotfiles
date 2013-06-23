@@ -19,8 +19,16 @@ set number
 set title
 set clipboard=unnamed,autoselect
 set guioptions+=a
-
 set shell=zsh
+
+" search
+"-----------------------------------------------------------
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set wrapscan
+set history=1000
 
 " tab
 "-----------------------------------------------------------
@@ -61,25 +69,18 @@ if &encoding == 'utf-8'
 endif
 scriptencoding cp932
 
-" .....
+" 改行コード
 set list
 set listchars=tab:>-,trail:-,extends:<,precedes:<
-" ..........
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
 au BufNewFile,BufRead * match ZenkakuSpace /./
 
-"nerdTree
+"NerdTree
 "---------------------------------------------------------
-" .....
 let NERDChristmasTree = 1
-" .........
 let NERDTreeShowHidden = 1
-" ..............(0:..)
 let NERDTreeDirArrows = 0
-" .........
 autocmd vimenter * if !argc() | NERDTree | endif
-" ....
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Ctrl + e....
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
@@ -99,21 +100,21 @@ endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-
 NeoBundle 'Shougo/vimproc.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.git'
-NeoBundle 'honza/snipmate-snippets'
 NeoBundle 'The-NERD-tree'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'taichouchou2/vim-rsense'
 NeoBundle 'tpope/vim-endwise.git'
 NeoBundle 'ruby-matchit'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'vim-scripts/AnsiEsc.vim'
-NeoBundle 'taq/vim-rspec'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'Shougo/neocomplcache-rsense'
+NeoBundle 'taichouchou2/rsense-0.3'
 
 " solarized カラースキーム
 NeoBundle 'altercation/vim-colors-solarized'
@@ -143,29 +144,22 @@ NeoBundle 'ujihisa/unite-colorscheme'
 "colorsheme
 "---------------------------------------------------------
 set t_Co=256
-"colorscheme desert256
-"colorscheme xoria256
 colorscheme jellybeans
 
 filetype plugin indent on " Enable filetype-specific indenting and plugins
 
-"ctags
-"autocmd FileType php :set tags=~/.vim/tags/homes.tags
-
 "status line
-"-------------------------------------------------------------------------
+"---------------------------------------------------------
 set laststatus=2
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set statusline=%F%m%r%h%w\ F=%{&ff}\ T=%Y\ A=\%03.3b\ H=\%02.2B\ P=%04l,%04v[%p%%]\ L=%L
 
-
-"ruby
-"source $VIMRUNTIME/macros/matchit.vim
-
-let g:rsenseHome = "/home/tomitam/rsense-0.3"
-let g:rsenseUseOmniFunc = 1
-
+" neocomplcache
 let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplcache#sources#rsense#home_directory = expand('~/.vim/bundle/rsense-0.3')
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_skip_auto_completion_time = '0.3'
 function InsertTabWrapper()
     if pumvisible()
         return "\<c-n>"
@@ -181,14 +175,6 @@ function InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-" quickrun rspec
-"let g:quickrun_config = {}
-"let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
-"augroup RSpec
-"        autocmd!
-"        autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-"augroup END
-
 " neosnippet
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -203,5 +189,5 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
-
+" omni補完
+imap <C-space> <C-x><C-o>
