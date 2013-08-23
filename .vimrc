@@ -115,6 +115,10 @@ NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'Shougo/neocomplcache-rsense'
 NeoBundle 'taichouchou2/rsense-0.3'
+NeoBundle 'tpope/vim-fugitive.git'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'mhinz/vim-signify'
 
 " solarized カラースキーム
 NeoBundle 'altercation/vim-colors-solarized'
@@ -151,7 +155,12 @@ filetype plugin indent on " Enable filetype-specific indenting and plugins
 "status line
 "---------------------------------------------------------
 set laststatus=2
-set statusline=%F%m%r%h%w\ F=%{&ff}\ T=%Y\ A=\%03.3b\ H=\%02.2B\ P=%04l,%04v[%p%%]\ L=%L
+"set statusline=%F%m%r%h%w\ F=%{&ff}\ T=%Y\ A=\%03.3b\ H=\%02.2B\ P=%04l,%04v[%p%%]\ L=%L
+let g:airline_theme = 'light'
+let g:airline#extensions#hunks#enabled = 1
+
+"git
+let g:gitgutter_highlight_lines = 1
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
