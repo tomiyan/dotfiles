@@ -5,12 +5,6 @@
 # LANG
 #
 export LANG=ja_JP.UTF-8
-case ${UID} in
-0)
-    LANG=C
-    ;;
-esac
-
 
 ## Default shell configuration
 #
@@ -224,3 +218,4 @@ esac
 #
 [ -f ${HOME}/.zshrc.mine ] && source ${HOME}/.zshrc.mine
 
+export LESSCHARSET=utf-8
