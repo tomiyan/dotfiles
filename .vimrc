@@ -32,9 +32,10 @@ set history=1000
 
 " tab
 "-----------------------------------------------------------
-au FileType ruby set ts=2 sw=2 softtabstop=4 expandtab
+au FileType ruby set ts=2 sw=2 softtabstop=2 expandtab
+au FileType eruby set ts=2 sw=2 softtabstop=2 expandtab
 au FileType php  set ts=4 sw=4 softtabstop=4 expandtab
-au FileType html set ts=4 sw=4 softtabstop=2 expandtab
+au FileType html set ts=2 sw=2 softtabstop=2 expandtab
 au FileType js   set ts=2 sw=2 softtabstop=2 expandtab
 au FileType javascript set ts=2 sw=2 softtabstop=2 expandtab
 au FileType yaml set ts=2 sw=2 softtabstop=2 expandtab
@@ -93,6 +94,8 @@ cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 set nocompatible          " We're running Vim, not Vi!
 filetype off
 
+runtime macros/matchit.vim
+
 " neobundle....
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -106,7 +109,6 @@ NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'The-NERD-tree'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'tpope/vim-endwise.git'
-NeoBundle 'ruby-matchit'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'vim-scripts/AnsiEsc.vim'
@@ -120,6 +122,8 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'gregsexton/gitv'
+NeoBundle 'tpope/vim-rails'
 
 " solarized カラースキーム
 NeoBundle 'altercation/vim-colors-solarized'
