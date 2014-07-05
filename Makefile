@@ -1,23 +1,17 @@
-DOT_FILES = .zshrc .vimrc .tmux.conf
+DOTFILES = $(PWD)
 
-all: zsh vim tmux
+all:: zsh vim tmux git
 
-zsh: $(foreach f, $(filter .zsh%, $(DOT_FILES)), link-dot-file-$(f))
+zsh::
+	@ln -snf $(DOTFILES)/.zshrc $(HOME)/.zshrc
 
-vim:
-	@if[ -d $(HOME)/.vim/bundle ] || mkdir -p $(HOME)/.vim/bundle
+vim::
+	@mkdir -p $(HOME)/.vim/bundle
 	@git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-	$(foreach f, $(filter .vim%, $(DOT_FILES)), link-dot-file-$(f))
+	@ln -snf $(DOTFILES)/.vimrc $(HOME)/.vimrc
 
-tmux: $(foreach f, $(filter .tmux%, $(DOT_FILES)), link-dot-file-$(f))
-  
-.PHONY: clean
-clean: $(foreach f, $(DOT_FILES), unlink-dot-file-$(f))
+tmux:
+	@ln -snf $(DOTFILES)/.tmux.conf ${HOME}/.tmux.conf
 
-link-dot-file-%: %
-	@echo "Create Symlink $< => $(HOME)/$<"
-	@ln -snf $(CURDIR)/$< $(HOME)/$<
-
-unlink-dot-file-%: %
-	@echo "Remove Symlink $(HOME)/$<"
-	@$(RM) $(HOME)/$<
+git:
+	@ln -snf $(DOTFILES)/.gitconfig ${HOME}/.gitconfig

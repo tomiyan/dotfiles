@@ -1,0 +1,14 @@
+[user]
+	name = Masakuni Tomita
+	email = tomiyanx@gmail.com
+
+[alias]
+	st = status
+	co = checkout
+	l = log
+
+[core]
+	editor = vim
+
+[color]
+	ui = auto
