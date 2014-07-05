@@ -103,7 +103,14 @@ endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-NeoBundle 'Shougo/vimproc.git'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'The-NERD-tree'
