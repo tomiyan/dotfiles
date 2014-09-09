@@ -1,0 +1,9 @@
+gem: "--user-install"
+:update_sources:  true
+:bulk_threshould: 1000
+:sources:
+- https://rubygems.org/
+- http://gemcutter.org/
+:verbose: true
+:backtrace: false
+:benchmark: false

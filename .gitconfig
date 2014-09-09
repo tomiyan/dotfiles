@@ -1,14 +1,19 @@
+[core]
+	excludesfile = ~/.gitignore-global
+	editor = vim
+[color]
+	ui = true
 [user]
-	name = Masakuni Tomita
-	email = tomiyanx@gmail.com
-
+	name = TomitaMasakuni
+	email = TomitaMasakuni@next-group.jp
+[log]
+	date = iso
 [alias]
 	st = status
+	sh = show
+	cm = commit
 	co = checkout
-	l = log
-
-[core]
-	editor = vim
-
-[color]
-	ui = auto
+	m = checkout master
+	df = diff
+	l = log --decorate --abbrev-commit
+	ll = log --name-only --decorate

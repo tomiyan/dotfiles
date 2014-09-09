@@ -1,17 +1,26 @@
-DOTFILES = $(PWD)
+DOT_FILES = .zshrc .vimrc .vim .tmux.conf .gitconfig .gitignore-global .gemrc
 
-all:: zsh vim tmux git
+all: zsh vim tmux git gem
 
 zsh::
 	@ln -snf $(DOTFILES)/.zshrc $(HOME)/.zshrc
 
-vim::
-	@mkdir -p $(HOME)/.vim/bundle
-	@git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-	@ln -snf $(DOTFILES)/.vimrc $(HOME)/.vimrc
+vim: $(foreach f, $(filter .vim%, $(DOT_FILES)), link-dot-file-$(f))
 
-tmux:
-	@ln -snf $(DOTFILES)/.tmux.conf ${HOME}/.tmux.conf
+tmux: $(foreach f, $(filter .tmux%, $(DOT_FILES)), link-dot-file-$(f))
 
-git:
-	@ln -snf $(DOTFILES)/.gitconfig ${HOME}/.gitconfig
+git: $(foreach f, $(filter .git%, $(DOT_FILES)), link-dot-file-$(f))
+
+gem: $(foreach f, $(filter .gem%, $(DOT_FILES)), link-dot-file-$(f))
+
+.PHONY: clean
+clean: $(foreach f, $(DOT_FILES), unlink-dot-file-$(f))
+
+
+link-dot-file-%: %
+	@echo "Create Symlink $< => $(HOME)/$<"
+	@ln -snf $(CURDIR)/$< $(HOME)/$<
+
+unlink-dot-file-%: %
+	@echo "Remove Symlink $(HOME)/$<"
+	@$(RM) $(HOME)/$<

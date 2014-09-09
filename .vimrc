@@ -1,11 +1,8 @@
 "omajinai
 "----------------------------------------------------------
-"set term=builtin_linux
 set term=xterm
-"set ttytype=builtin_linux
 set mouse=a
 set ttymouse=xterm2
-
 
 " edit
 "-----------------------------------------------------------
@@ -19,7 +16,10 @@ set number
 set title
 set clipboard=unnamed,autoselect
 set guioptions+=a
+set cursorline
 set shell=zsh
+set noswapfile
+set scrolloff=5
 
 " search
 "-----------------------------------------------------------
@@ -36,7 +36,6 @@ au FileType ruby set ts=2 sw=2 softtabstop=2 expandtab
 au FileType eruby set ts=2 sw=2 softtabstop=2 expandtab
 au FileType php  set ts=4 sw=4 softtabstop=4 expandtab
 au FileType html set ts=2 sw=2 softtabstop=2 expandtab
-au FileType js   set ts=2 sw=2 softtabstop=2 expandtab
 au FileType javascript set ts=2 sw=2 softtabstop=2 expandtab
 au FileType yaml set ts=2 sw=2 softtabstop=2 expandtab
 au! BufNewFile,BufRead *.as :set filetype=actionscript
@@ -45,25 +44,15 @@ au! BufNewFile,BufRead *.phtml :set filetype=html
 au! BufNewFile,BufRead *.twig :set filetype=html
 au! BufNewFile,BufRead *.rb :set filetype=ruby
 au! BufNewFile,BufRead *.yml :set filetype=yaml
+au! BufNewFile,BufRead *.js :set filetype=javascript
 
 set smarttab
 inoremap <C-Tab> <C-V><Tab>
-
-" 80........
-"set textwidth=0
-"if exists('&colorcolumn')
-"    set colorcolumn=+1
-"    " sh,cpp,perl,vim,............
-"    " ..........filetype.........
-"    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
-"endif
 
 "utf-8
 "----------------------------------------------------------
 set termencoding=utf-8
 set encoding=utf-8
-
-"set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp-2,euc-jisx0213,euc-jp,cp932
 
 if &encoding == 'utf-8'
     set ambiwidth=double
@@ -103,6 +92,7 @@ endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
+NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -113,23 +103,30 @@ NeoBundle 'Shougo/vimproc.vim', {
       \ }
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.git'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'The-NERD-tree'
 NeoBundle 'The-NERD-Commenter'
+NeoBundle 'take/rsense-0.3'
+NeoBundle 'Shougo/neocomplcache-rsense.git'
 NeoBundle 'tpope/vim-endwise.git'
+NeoBundle 'ruby-matchit'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'vim-scripts/AnsiEsc.vim'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'skwp/vim-rspec'
+NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'tpope/vim-surround.git'
-NeoBundle 'Shougo/neocomplcache-rsense'
-NeoBundle 'taichouchou2/rsense-0.3'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mhinz/vim-signify'
-NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'gregsexton/gitv'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'jgdavey/vim-blockle'
+NeoBundle 'lepture/vim-jinja'
+NeoBundle 'sakuraiyuta/commentout.vim.git'
+NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
 
 " solarized カラースキーム
@@ -167,12 +164,8 @@ filetype plugin indent on " Enable filetype-specific indenting and plugins
 "status line
 "---------------------------------------------------------
 set laststatus=2
-"set statusline=%F%m%r%h%w\ F=%{&ff}\ T=%Y\ A=\%03.3b\ H=\%02.2B\ P=%04l,%04v[%p%%]\ L=%L
 let g:airline_theme = 'light'
 let g:airline#extensions#hunks#enabled = 1
-
-"git
-let g:gitgutter_highlight_lines = 1
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
@@ -181,20 +174,6 @@ let g:neocomplcache#sources#rsense#home_directory = expand('~/.vim/bundle/rsense
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_skip_auto_completion_time = '0.3'
-function InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<tab>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
-    else
-        return "\<c-x>\<c-o>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " neosnippet
 " Plugin key-mappings.
@@ -211,7 +190,9 @@ if has('conceal')
 endif
 
 " omni補完
-imap <C-space> <C-x><C-o>
+" imap <C-space> <C-x><C-o>
+
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=2
