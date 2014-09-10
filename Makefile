@@ -2,8 +2,7 @@ DOT_FILES = .zshrc .vimrc .vim .tmux.conf .gitconfig .gitignore-global .gemrc
 
 all: zsh vim tmux git gem
 
-zsh::
-	@ln -snf $(DOTFILES)/.zshrc $(HOME)/.zshrc
+zsh: $(foreach f, $(filter .zsh%, $(DOT_FILES)), link-dot-file-$(f))
 
 vim: $(foreach f, $(filter .vim%, $(DOT_FILES)), link-dot-file-$(f))
 
