@@ -219,3 +219,4 @@ esac
 [ -f ${HOME}/.zshrc.mine ] && source ${HOME}/.zshrc.mine
 
 export LESSCHARSET=utf-8
+export EDITOR=vim

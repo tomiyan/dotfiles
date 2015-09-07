@@ -1,4 +1,13 @@
-"omajinai
+"utf-8
+"----------------------------------------------------------
+set encoding=utf-8
+set termencoding=utf-8
+scriptencoding utf-8
+
+if &encoding == 'utf-8'
+    set ambiwidth=double
+endif
+
 "----------------------------------------------------------
 set term=xterm
 set mouse=a
@@ -20,6 +29,14 @@ set cursorline
 set shell=zsh
 set noswapfile
 set scrolloff=5
+set pumheight=10
+
+" inclement/decrement
+nnoremap + <C-a>
+nnoremap - <C-x>
+
+" yank
+nnoremap Y y$
 
 " search
 "-----------------------------------------------------------
@@ -30,34 +47,29 @@ set hlsearch
 set wrapscan
 set history=1000
 
-" tab
-"-----------------------------------------------------------
-au FileType ruby set ts=2 sw=2 softtabstop=2 expandtab
-au FileType eruby set ts=2 sw=2 softtabstop=2 expandtab
-au FileType php  set ts=4 sw=4 softtabstop=4 expandtab
-au FileType html set ts=2 sw=2 softtabstop=2 expandtab
-au FileType javascript set ts=2 sw=2 softtabstop=2 expandtab
-au FileType yaml set ts=2 sw=2 softtabstop=2 expandtab
-au! BufNewFile,BufRead *.as :set filetype=actionscript
-au! BufNewFile,BufRead *.thtml :set filetype=html
-au! BufNewFile,BufRead *.phtml :set filetype=html
-au! BufNewFile,BufRead *.twig :set filetype=html
-au! BufNewFile,BufRead *.rb :set filetype=ruby
-au! BufNewFile,BufRead *.yml :set filetype=yaml
-au! BufNewFile,BufRead *.js :set filetype=javascript
+augroup vimrc
+    autocmd!
+augroup END
+
+au vimrc FileType ruby set ts=2 sw=2 softtabstop=2 expandtab
+au vimrc FileType php  set ts=4 sw=4 softtabstop=4 expandtab
+au vimrc FileType html set ts=4 sw=4 softtabstop=2 expandtab
+au vimrc FileType javascript set ts=2 sw=2 softtabstop=2 expandtab
+au vimrc FileType yaml set ts=2 sw=2 softtabstop=2 expandtab
+au vimrc FileType jinja set ts=4 sw=4 softtabstop=2 expandtab
+au vimrc FileType vim set ts=4 sw=4 softtabstop=4 expandtab
+au! vimrc BufNewFile,BufRead *.as :set filetype=actionscript
+au! vimrc BufNewFile,BufRead *.thtml :set filetype=html
+au! vimrc BufNewFile,BufRead *.phtml :set filetype=html
+au! vimrc BufNewFile,BufRead *.twig :set filetype=jinja
+au! vimrc BufNewFile,BufRead *_spec.rb :set filetype=ruby syntax=rspec
+au! vimrc BufNewFile,BufRead *.rb :set filetype=ruby
+au! vimrc BufNewFile,BufRead *.yml :set filetype=yaml
+au! vimrc BufNewFile,BufRead *.js :set filetype=javascript
+au! vimrc BufNewFile,BufRead *.vimrc :set filetype=vim
 
 set smarttab
 inoremap <C-Tab> <C-V><Tab>
-
-"utf-8
-"----------------------------------------------------------
-set termencoding=utf-8
-set encoding=utf-8
-
-if &encoding == 'utf-8'
-    set ambiwidth=double
-endif
-scriptencoding cp932
 
 " 改行コード
 set list
@@ -129,26 +141,30 @@ NeoBundle 'sakuraiyuta/commentout.vim.git'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
 
-" solarized カラースキーム
-NeoBundle 'altercation/vim-colors-solarized'
-" mustang カラースキーム
-NeoBundle 'croaker/mustang-vim'
-" wombat カラースキーム
-NeoBundle 'jeffreyiacono/vim-colors-wombat'
+
+NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
+NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'mattn/emmet-vim'
+
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+
+" incsearch
+NeoBundle 'haya14busa/incsearch.vim'
+NeoBundle 'haya14busa/incsearch-fuzzy.vim'
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-fuzzyspell-/)
+map z? <Plug>(incsearch-fuzzyspell-?)
+map zg/ <Plug>(incsearch-fuzzyspell-stay)
+
 " jellybeans カラースキーム
 NeoBundle 'nanotech/jellybeans.vim'
-" lucius カラースキーム
-NeoBundle 'vim-scripts/Lucius'
-" zenburn カラースキーム
-NeoBundle 'vim-scripts/Zenburn'
-" mrkn256 カラースキーム
-NeoBundle 'mrkn/mrkn256.vim'
-" railscasts カラースキーム
-NeoBundle 'jpo/vim-railscasts-theme'
-" pyte カラースキーム
-NeoBundle 'therubymug/vim-pyte'
-" molokai カラースキーム
-NeoBundle 'tomasr/molokai'
 
 " カラースキーム一覧表示に Unite.vim を使う
 NeoBundle 'Shougo/unite.vim'
@@ -201,3 +217,14 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=gray
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgray
 let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 1
+
+" indent
+let g:indentLine_faster = 1
+nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+
+" vim-easy-align
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+
+" vim-gitgutter
+let g:gitgutter_max_signs = 1000
