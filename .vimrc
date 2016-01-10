@@ -153,15 +153,15 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 
 " incsearch
-NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'haya14busa/incsearch-fuzzy.vim'
+" NeoBundle 'haya14busa/incsearch.vim'
+" NeoBundle 'haya14busa/incsearch-fuzzy.vim'
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map z/ <Plug>(incsearch-fuzzyspell-/)
-map z? <Plug>(incsearch-fuzzyspell-?)
-map zg/ <Plug>(incsearch-fuzzyspell-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
+" map z/ <Plug>(incsearch-fuzzyspell-/)
+" map z? <Plug>(incsearch-fuzzyspell-?)
+" map zg/ <Plug>(incsearch-fuzzyspell-stay)
 
 " jellybeans カラースキーム
 NeoBundle 'nanotech/jellybeans.vim'
@@ -228,3 +228,7 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " vim-gitgutter
 let g:gitgutter_max_signs = 1000
+
+" json
+set conceallevel=0
+let g:vim_json_syntax_conceal = 0

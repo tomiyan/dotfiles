@@ -220,3 +220,5 @@ esac
 
 export LESSCHARSET=utf-8
 export EDITOR=vim
+
+fpath=(/usr/local/share/zsh-completions $fpath)
