@@ -113,15 +113,15 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-NeoBundle 'Shougo/neocomplcache.git'
+" NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'The-NERD-tree'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'take/rsense-0.3'
-NeoBundle 'Shougo/neocomplcache-rsense.git'
+" NeoBundle 'take/rsense-0.3'
+" NeoBundle 'Shougo/neocomplcache-rsense.git'
 NeoBundle 'tpope/vim-endwise.git'
 NeoBundle 'ruby-matchit'
 NeoBundle 'Shougo/vimshell.git'
@@ -131,6 +131,7 @@ NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'gregsexton/gitv'
@@ -184,12 +185,12 @@ let g:airline_theme = 'light'
 let g:airline#extensions#hunks#enabled = 1
 
 " neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplcache#sources#rsense#home_directory = expand('~/.vim/bundle/rsense-0.3')
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_skip_auto_completion_time = '0.3'
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_force_overwrite_completefunc = 1
+" let g:neocomplcache#sources#rsense#home_directory = expand('~/.vim/bundle/rsense-0.3')
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_skip_auto_completion_time = '0.3'
 
 " neosnippet
 " Plugin key-mappings.
