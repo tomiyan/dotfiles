@@ -223,7 +223,8 @@ export EDITOR=vim
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-export RBENV_ROOT=$HOME/.rbenv
-export PATH="$RBENV_ROOT/bin:$PATH"
-eval "$(rbenv init -)"
-
+if [ -f $(brew --prefix)/etc/brew-wrap ];then
+  source $(brew --prefix)/etc/brew-wrap
+fi
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init zsh -)"

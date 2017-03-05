@@ -38,6 +38,9 @@ nnoremap - <C-x>
 " yank
 nnoremap Y y$
 
+" clipboard
+set clipboard+=unnamed
+
 " search
 "-----------------------------------------------------------
 set ignorecase
