@@ -227,4 +227,4 @@ if [ -f $(brew --prefix)/etc/brew-wrap ];then
   source $(brew --prefix)/etc/brew-wrap
 fi
 export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init zsh -)"
+eval "$(anyenv init - zsh)"
