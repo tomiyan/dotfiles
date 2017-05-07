@@ -144,6 +144,7 @@ NeoBundle 'lepture/vim-jinja'
 NeoBundle 'sakuraiyuta/commentout.vim.git'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
+NeoBundle 'fatih/vim-go'
 
 
 NeoBundle 'Yggdroot/indentLine'
@@ -236,3 +237,8 @@ let g:gitgutter_max_signs = 1000
 " json
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
+
+" vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
